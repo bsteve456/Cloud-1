@@ -6,3 +6,7 @@
    - name: Print message
      ansible.builtin.debug:
        msg: Hello world
+   - name: Copy docker-compose to remote server
+     ansible.builtin.copy:
+       src: "{{ playbook_dir }}/app/docker-compose.yaml"
+       dest: /tmp/docker-compose.yaml
