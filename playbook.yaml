@@ -10,6 +10,10 @@
      ansible.builtin.copy:
        src: "{{ playbook_dir }}/app/docker-compose.yaml"
        dest: /tmp/docker-compose.yaml
+   - name: Copy mysql variable file to remote server
+     ansible.builtin.copy:
+       src: "{{ playbook_dir }}/app/mysql_variable.env"
+       dest: /tmp/mysql_variable.env
    - name: docker-compose up in the remote server
      community.docker.docker_compose:
        project_src: "/tmp"
