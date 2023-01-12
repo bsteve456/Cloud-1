@@ -8,12 +8,12 @@
        msg: Hello world
    - name: Copy docker-compose to remote server
      ansible.builtin.copy:
-       src: "{{ playbook_dir }}/app/docker-compose.yaml"
-       dest: /tmp/docker-compose.yaml
-   - name: Copy mysql variable file to remote server
-     ansible.builtin.copy:
-       src: "{{ playbook_dir }}/app/mysql_variable.env"
-       dest: /tmp/mysql_variable.env
+       src: "{{ playbook_dir }}/app/"
+       dest: /tmp/
+#   - name: Copy vrb file to remote server
+#     ansible.builtin.copy:
+#       src: "{{ playbook_dir }}/app/vrb.env"
+#       dest: /tmp/vrb.env
    - name: docker-compose up in the remote server
      community.docker.docker_compose:
        project_src: "/tmp"
@@ -21,6 +21,11 @@
         - docker-compose.yaml
        services:
        state: "present"
+   - name: Restart services
+     community.docker.docker_compose:
+       project_src: "/tmp"
+       build: false
+       restarted: true
    - name: docker-compose stop in the remote server
      community.docker.docker_compose:
        project_src: /tmp

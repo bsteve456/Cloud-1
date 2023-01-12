@@ -1,14 +1,37 @@
 version: "3.9"
 services:
- web:
+ nginx:
+   networks:
+     - wp-network
    image: nginx:latest
+   volumes:
+     - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
    ports:
-     - "8080:80"
- db:
+     - "80:80"
+     - "443:443"
+ mysql:
+   networks:
+     - wp-network
    image: mysql:latest
    volumes:
       - ./mysql:/var/lib/mysql
    env_file:
-      - mysql_variable.env
+      - vrb.env
    ports:
       - "3306:3306"
+ wordpress:
+   networks:
+     - wp-network
+   image: wordpress:6.1.1-fpm-alpine
+   depends_on:
+      - mysql
+   links:
+      - mysql
+   env_file:
+      - vrb.env
+   ports:
+      - "9000:9000"
+volumes:
+  mysql:
+networks:
+  wp-network:
