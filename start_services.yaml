@@ -1,4 +1,4 @@
-- name: My first play
+- name: start services
   hosts: virtualmachines
   tasks:
    - name: Ping my hosts
@@ -18,15 +18,3 @@
        build: true
        services:
        state: "present"
-   - name: Restart services
-     community.docker.docker_compose:
-       project_src: "/tmp"
-       build: false
-       restarted: true
-#   - name: docker-compose stop in the remote server
-#     community.docker.docker_compose:
-#       project_src: /tmp
-#       files:
-#        - docker-compose.yaml
-#       services:
-#       state: "absent"

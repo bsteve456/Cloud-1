@@ -1,0 +1,8 @@
+- name: restart services
+  hosts: virtualmachines
+  tasks:
+    - name: Restart services
+      community.docker.docker_compose:
+        project_src: "/tmp"
+        build: false
+        restarted: true
