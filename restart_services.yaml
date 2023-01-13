@@ -3,6 +3,6 @@
   tasks:
     - name: Restart services
       community.docker.docker_compose:
-        project_src: "/tmp"
+        project_src: "/tmp/app"
         build: false
         restarted: true

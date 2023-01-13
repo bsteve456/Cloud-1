@@ -1,0 +1,26 @@
+- name: delete configuration in the remote server
+  hosts: virtualmachines
+  tasks:
+   - name: docker-compose stop in the remote server
+     community.docker.docker_compose:
+       project_src: /tmp/app
+       files:
+        - docker-compose.yaml
+       services:
+       state: "absent"
+
+   - name: Prune everything
+     community.docker.docker_prune:
+       containers: true
+       images: true
+       images_filters:
+         dangling: false
+       networks: true
+       volumes: true
+       builder_cache: true
+
+   - name: Recursively remove directory
+     ansible.builtin.file:
+       path: /tmp/app
+       state: absent
+

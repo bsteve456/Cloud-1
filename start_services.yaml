@@ -8,11 +8,11 @@
        msg: Hello world
    - name: Copy docker-compose to remote server
      ansible.builtin.copy:
-       src: "{{ playbook_dir }}/app/"
+       src: "{{ playbook_dir }}/app"
        dest: /tmp/
    - name: docker-compose up in the remote server
      community.docker.docker_compose:
-       project_src: "/tmp"
+       project_src: "/tmp/app"
        files:
         - docker-compose.yaml
        build: true
