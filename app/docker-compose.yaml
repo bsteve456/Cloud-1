@@ -3,9 +3,7 @@ services:
  nginx:
    networks:
      - wp-network
-   image: nginx:latest
-   volumes:
-     - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
+   build: ./nginx
    ports:
      - "80:80"
      - "443:443"
