@@ -10,15 +10,12 @@
      ansible.builtin.copy:
        src: "{{ playbook_dir }}/app/"
        dest: /tmp/
-#   - name: Copy vrb file to remote server
-#     ansible.builtin.copy:
-#       src: "{{ playbook_dir }}/app/vrb.env"
-#       dest: /tmp/vrb.env
    - name: docker-compose up in the remote server
      community.docker.docker_compose:
        project_src: "/tmp"
        files:
         - docker-compose.yaml
+       build: true
        services:
        state: "present"
    - name: Restart services
@@ -26,10 +23,10 @@
        project_src: "/tmp"
        build: false
        restarted: true
-   - name: docker-compose stop in the remote server
-     community.docker.docker_compose:
-       project_src: /tmp
-       files:
-        - docker-compose.yaml
-       services:
-       state: "absent"
+#   - name: docker-compose stop in the remote server
+#     community.docker.docker_compose:
+#       project_src: /tmp
+#       files:
+#        - docker-compose.yaml
+#       services:
+#       state: "absent"
