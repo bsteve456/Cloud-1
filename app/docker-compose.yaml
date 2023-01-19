@@ -1,12 +1,5 @@
 version: "3.9"
 services:
- nginx:
-   networks:
-     - wp-network
-   build: ./nginx
-   ports:
-     - "80:80"
-     - "443:443"
  mysql:
    networks:
      - wp-network
@@ -18,17 +11,29 @@ services:
    ports:
       - "3306:3306"
  wordpress:
+   container_name: wordpress
    networks:
      - wp-network
    image: wordpress:6.1.1-fpm-alpine
    depends_on:
       - mysql
-   links:
-      - mysql
    env_file:
       - .env
    ports:
       - "9000:9000"
+   volumes:
+      - /tmp/app/wordpress/html:/var/www/html
+ nginx:
+   networks:
+     - wp-network
+   build: ./nginx
+   ports:
+     - "80:80"
+     - "443:443"
+   volumes:
+     - /tmp/app/wordpress/html:/var/www/html
+   depends_on:
+     - wordpress
 volumes:
   mysql:
 networks:
