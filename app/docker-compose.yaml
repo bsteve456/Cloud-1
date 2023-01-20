@@ -32,7 +32,6 @@ services:
      - "443:443"
    volumes:
      - /tmp/app/wordpress/html:/var/www/html
-     - /tmp/app/wordpress/htm:/var/www/htm
    depends_on:
      - wordpress
      - phpmyadmin
@@ -47,8 +46,6 @@ services:
      - "5000:5000"
    env_file:
      - .env
-   volumes:
-     - /tmp/app/wordpress/htm:/var/www/htm
 volumes:
   mysql:
 networks:
