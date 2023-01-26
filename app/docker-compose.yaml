@@ -20,7 +20,7 @@ services:
    env_file:
       - .env
    ports:
-      - "9000:9000"
+      - "9090:9090"
    volumes:
       - /tmp/app/wordpress/html:/var/www/html
  nginx:
@@ -32,6 +32,7 @@ services:
      - "443:443"
    volumes:
      - /tmp/app/wordpress/html:/var/www/html
+     - /tmp/app/phpmyadmin/htm:/usr/share/phpmyadmin
    depends_on:
      - wordpress
      - phpmyadmin
@@ -40,12 +41,15 @@ services:
    networks:
      - wp-network
    build: ./phpmyadmin
+   command: cp -r /var/www/html/. /usr/share/phpmyadmin
    depends_on:
      - mysql
    ports:
-     - "5000:5000"
+     - "9000:9000"
    env_file:
      - .env
+   volumes:
+     - /tmp/app/phpmyadmin/htm:/usr/share/phpmyadmin
 volumes:
   mysql:
 networks:
