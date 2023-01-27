@@ -1,6 +1,7 @@
 version: "3.9"
 services:
  mysql:
+   container_name: mysql
    networks:
      - wp-network
    image: mysql:latest
@@ -13,9 +14,7 @@ services:
  wordpress:
    container_name: wordpress
    networks:
-     wp-network:
-       aliases:
-         - wordpress
+     - wp-network
    image: wordpress:6.1.1-fpm-alpine
    depends_on:
       - mysql
@@ -42,9 +41,7 @@ services:
  phpmyadmin:
    container_name: phpmyadmin
    networks:
-     wp-network:
-       aliases:
-         - phpmyadmin
+     - wp-network
    build: ./phpmyadmin
    command: ["sh", "-c", "cp -r /var/www/html/. /usr/share/phpmyadmin && php-fpm"]
    depends_on:
