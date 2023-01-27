@@ -13,16 +13,19 @@ services:
  wordpress:
    container_name: wordpress
    networks:
-     - wp-network
+     wp-network:
+       aliases:
+         - wordpress
    image: wordpress:6.1.1-fpm-alpine
    depends_on:
       - mysql
    env_file:
       - .env
    ports:
-      - "9090:9090"
+      - "9000:9000"
    volumes:
       - /tmp/app/wordpress/html:/var/www/html
+      - /tmp/app/phpmyadmin/htm:/usr/share/phpmyadmin
  nginx:
    networks:
      - wp-network
@@ -39,17 +42,20 @@ services:
  phpmyadmin:
    container_name: phpmyadmin
    networks:
-     - wp-network
+     wp-network:
+       aliases:
+         - phpmyadmin
    build: ./phpmyadmin
-   command: cp -r /var/www/html/. /usr/share/phpmyadmin
+   command: ["sh", "-c", "cp -r /var/www/html/. /usr/share/phpmyadmin && php-fpm"]
    depends_on:
      - mysql
    ports:
-     - "9000:9000"
+     - "5000:5000"
    env_file:
      - .env
    volumes:
      - /tmp/app/phpmyadmin/htm:/usr/share/phpmyadmin
+     - ./mysql:/var/lib/mysql
 volumes:
   mysql:
 networks:
