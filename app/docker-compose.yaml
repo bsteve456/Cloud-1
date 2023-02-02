@@ -24,7 +24,6 @@ services:
       - "9000:9000"
    volumes:
       - /tmp/app/wordpress/html:/var/www/html
-     # - /tmp/app/phpmyadmin/htm:/usr/share/phpmyadmin
  nginx:
    networks:
      - wp-network
