@@ -13,7 +13,7 @@ declare(strict_types=1);
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = ''; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = $_ENV['BLF_SECRET']; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /**
  * Servers configuration
@@ -27,10 +27,10 @@ $i++;
 /* Authentication type */
 $cfg['Servers'][$i]['auth_type'] = 'cookie';
 /* Server parameters */
-$cfg['Servers'][$i]['host'] = 'mysql';
+$cfg['Servers'][$i]['host'] = $_ENV['PMA_HOST'];
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
-
+$cfg['Servers'][$i]['ssl'] = true;
 /**
  * phpMyAdmin configuration storage settings.
  */
@@ -72,7 +72,7 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
  */
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
-
+$cfg['TempDir'] = '/usr/share/phpmyadmin/tmp';
 /**
  * Whether to display icons or text or both icons and text in table row
  * action segment. Value can be either of 'icons', 'text' or 'both'.
