@@ -10,7 +10,7 @@ services:
    env_file:
       - .env
    ports:
-      - "3306:3306"
+     - "127.0.0.1:3306:3306"
  wordpress:
    container_name: wordpress
    networks:
@@ -21,7 +21,7 @@ services:
    env_file:
       - .env
    ports:
-      - "9000:9000"
+     - "127.0.0.1:9000:9000"
    volumes:
       - /tmp/app/wordpress/html:/var/www/html
  nginx:
@@ -46,7 +46,7 @@ services:
    depends_on:
      - mysql
    ports:
-     - "9090:9000"
+     - "127.0.0.1:9090:9000"
    env_file:
      - .env
    volumes:
