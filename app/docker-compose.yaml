@@ -6,7 +6,7 @@ services:
      - wp-network
    image: mysql:latest
    volumes:
-      - ./mysql:/var/lib/mysql
+     - ./mysql:/var/lib/mysql
    env_file:
       - .env
    ports:
@@ -15,7 +15,7 @@ services:
    container_name: wordpress
    networks:
      - wp-network
-   image: wordpress:6.1.1-fpm-alpine
+   image: wordpress:6.1.1-fpm
    depends_on:
       - mysql
    env_file:
