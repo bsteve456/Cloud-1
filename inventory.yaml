@@ -1,8 +1,8 @@
 virtualmachines:
   hosts:
- #   vm01:
- #     ansible_host: 51.159.178.242
- #     ansible_user: root
+    vm01:
+      ansible_host: 51.159.178.242
+      ansible_user: root
     vm02:
       ansible_host: 172.17.0.1
       ansible_user: root

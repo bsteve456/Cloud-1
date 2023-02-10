@@ -25,6 +25,7 @@ services:
    volumes:
       - /tmp/app/wordpress/html:/var/www/html
  nginx:
+   container_name: nginx
    networks:
      - wp-network
    build: ./nginx
@@ -42,7 +43,7 @@ services:
    networks:
      - wp-network
    build: ./phpmyadmin
-   command: ["sh", "-c", "cp -r /var/www/html/. /usr/share/phpmyadmin && php-fpm"]
+   command: ["sh", "-c", "cp -r /var/www/html/. /usr/share/phpmyadmin && chmod go+w /usr/share/phpmyadmin/tmp && php-fpm"]
    depends_on:
      - mysql
    ports:
