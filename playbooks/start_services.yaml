@@ -1,5 +1,5 @@
-- name: start services
-  hosts: virtualmachines
+- name: copy app directory into remote VMs
+  hosts: sites
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
@@ -10,6 +10,27 @@
      ansible.builtin.copy:
        src: "{{ playbook_dir }}/../app"
        dest: /tmp/
+
+- name: copy vm01 db files
+  hosts: vm01
+  tasks:
+   - name: copy db file
+     ansible.builtin.copy:
+       src: "{{ playbook_dir }}/../db/site1/data"
+       dest: /tmp/app/
+
+- name: copy vm02 db files
+  hosts: vm02
+  tasks:
+   - name: copy db file
+     ansible.builtin.copy:
+       src: "{{ playbook_dir }}/../db/site2/data"
+       dest: /tmp/app/
+
+
+- name: start services
+  hosts: sites
+  tasks:
    - name: docker-compose up in the remote server
      community.docker.docker_compose:
        project_src: "/tmp/app"

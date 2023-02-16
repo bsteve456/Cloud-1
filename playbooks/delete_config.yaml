@@ -1,5 +1,5 @@
 - name: delete configuration in the remote server
-  hosts: virtualmachines
+  hosts: sites
   tasks:
    - name: docker-compose stop in the remote server
      community.docker.docker_compose:

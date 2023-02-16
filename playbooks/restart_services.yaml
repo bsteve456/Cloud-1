@@ -1,5 +1,5 @@
 - name: restart services
-  hosts: virtualmachines
+  hosts: sites
   tasks:
     - name: Restart services
       community.docker.docker_compose:

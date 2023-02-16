@@ -1,5 +1,5 @@
 - name: stop services
-  hosts: virtualmachines
+  hosts: sites
   tasks:
    - name: docker-compose stop the services
      community.docker.docker_compose:
