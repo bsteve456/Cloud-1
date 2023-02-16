@@ -4,9 +4,10 @@ services:
    container_name: mysql
    networks:
      - wp-network
-   image: mysql:latest
+   image: mysql
    volumes:
      - ./mysql:/var/lib/mysql
+     - ./data:/docker-entrypoint-initdb.d
    env_file:
       - .env
    ports:
