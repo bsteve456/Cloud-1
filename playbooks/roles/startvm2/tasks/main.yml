@@ -1,0 +1,16 @@
+- name: Ping my hosts
+  ansible.builtin.ping:
+
+- name: Print message
+  ansible.builtin.debug:
+    msg: Hello world
+
+- name: Copy docker-compose to vm2
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../app"
+    dest: /tmp/
+
+- name: copy db file to site2
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../db/site2/data"
+    dest: /tmp/app/

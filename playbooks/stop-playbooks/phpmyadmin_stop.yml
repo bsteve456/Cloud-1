@@ -1,0 +1,11 @@
+- name: stop phpmyadmin service
+  hosts: sites
+  tasks:
+   - name: docker-compose stop the services
+     community.docker.docker_compose:
+       project_src: /tmp/app
+       files:
+        - docker-compose.yaml
+       build: false
+       services: phpmyadmin
+       stopped : true

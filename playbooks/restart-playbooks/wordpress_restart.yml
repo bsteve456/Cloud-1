@@ -1,0 +1,9 @@
+- name: restart wordpress service
+  hosts: sites
+  tasks:
+    - name: Restart services
+      community.docker.docker_compose:
+        project_src: "/tmp/app"
+        build: false
+        services: wordpress
+        restarted: true

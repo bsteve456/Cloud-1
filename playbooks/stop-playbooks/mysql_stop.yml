@@ -1,4 +1,4 @@
-- name: stop services
+- name: stop mysql service
   hosts: sites
   tasks:
    - name: docker-compose stop the services
@@ -7,5 +7,5 @@
        files:
         - docker-compose.yaml
        build: false
+       services: mysql
        stopped : true
-

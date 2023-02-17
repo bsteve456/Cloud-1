@@ -1,0 +1,14 @@
+- hosts: vm01
+  roles:
+    - startvm1
+
+- hosts: vm02
+  roles:
+   -  startvm2
+
+- hosts: sites
+  roles:
+    - database
+    - wordpress
+    - phpmyadmin
+    - webserver
