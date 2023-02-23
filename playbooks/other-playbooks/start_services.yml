@@ -8,7 +8,7 @@
        msg: Hello world
    - name: Copy docker-compose to remote server
      ansible.builtin.copy:
-       src: "{{ playbook_dir }}/../app"
+       src: "{{ playbook_dir }}/../../app"
        dest: /tmp/
 
 - name: copy vm01 db files
@@ -16,7 +16,7 @@
   tasks:
    - name: copy db file
      ansible.builtin.copy:
-       src: "{{ playbook_dir }}/../db/site1/data"
+       src: "{{ playbook_dir }}/../../db/site1/data"
        dest: /tmp/app/
 
 - name: copy vm02 db files
@@ -24,7 +24,7 @@
   tasks:
    - name: copy db file
      ansible.builtin.copy:
-       src: "{{ playbook_dir }}/../db/site2/data"
+       src: "{{ playbook_dir }}/../../db/site2/data"
        dest: /tmp/app/
 
 
